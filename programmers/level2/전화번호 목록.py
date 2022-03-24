@@ -1,7 +1,14 @@
-def solution(phoneBook):
-    phoneBook = sorted(phoneBook)
+def solution(phone_book):
+    answer = True
+    dic = {}
 
-    for p1, p2 in zip(phoneBook, phoneBook[1:]):
-        if p2.startswith(p1):
-            return False
-    return True
+    for p in phone_book:
+        dic[p] = 1
+
+    for p in phone_book:
+        tmp = ""
+        for num in p:
+            tmp += num
+            if tmp in dic and tmp!=p:
+                answer = False
+    return answer
