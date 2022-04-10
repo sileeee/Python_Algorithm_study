@@ -1,23 +1,28 @@
-n, m = map(int, input().split())
-l = []
-mini = []
+m, n = map(int, input().split())
+board = []
+w_sum = 0
+b_sum = 0
+total = []
 
-for _ in range(n):
-    l.append(input())
-
-for a in range(n - 7):
-    for i in range(m - 7):
-        idx1 = 0
-        idx2 = 0
-        for b in range(a, a + 8):
-            for j in range(i, i + 8):              
-                if (j + b)%2 == 0:
-                    if l[b][j] != 'W': idx1 += 1  
-                    if l[b][j] != 'B': idx2 += 1
-                else :
-                    if l[b][j] != 'B': idx1 += 1
-                    if l[b][j] != 'W': idx2 += 1
-        mini.append(idx1)                          
-        mini.append(idx2)                          
-
-print(min(mini))    
+for i in range(m):
+  x = input()
+  board.append(list(x)) # 문자열을 한 문자씩 리스트로 넣음
+for a in range(m-7):
+  for b in range(n-7):
+    b_sum = 0
+    w_sum = 0
+    for i in range(a, a+8):
+      for j in range(b, b+8):
+        if((i+j)%2==0):
+          if(board[i][j]!='W'): 
+            w_sum +=1 # W부터 시작할 때
+          if(board[i][j]!='B'): 
+            b_sum +=1 # B부터 시작할 때
+        else:
+          if(board[i][j]!='W'):
+            b_sum +=1
+          if(board[i][j]!='B'):
+            w_sum +=1
+    total.append(w_sum)
+    total.append(b_sum)
+print(min(total))
