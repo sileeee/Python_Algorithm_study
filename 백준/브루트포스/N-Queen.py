@@ -1,27 +1,19 @@
-n = int(input())
+# error
 
-ans = 0
-row = [0] * n
-
-def is_promising(x):
-    for i in range(x):
-        if row[x] == row[i] or abs(row[x] - row[i]) == abs(x - i):
-            return False
-    
-    return True
-
-def n_queens(x):
-    global ans
-    if x == n:
-        ans += 1
+def dfs(row):
+    global count
+    if(row == n):
+        count+=1
         return
+    for i in range(n):
+        graph[row] = i # 3,3 -> (1,1)(2,2) // (4,2) (5,1)
+        for j in range(row):
+            if(abs(graph[row]-graph[j]) == abs(row-j) or graph[row]==graph[j]):
+                return
+    dfs(row+1)
 
-    else:
-        for i in range(n):
-            # [x, i]에 퀸을 놓겠다.
-            row[x] = i
-            if is_promising(x):
-                n_queens(x+1)
-
-n_queens(0)
-print(ans)
+n = int(input())
+count = 0
+graph = [0]*n
+dfs(0)
+print(count)
