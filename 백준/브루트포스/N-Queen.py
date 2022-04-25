@@ -1,4 +1,8 @@
-# error
+def is_promising(x):
+    for i in range(x):
+        if graph[x] == graph[i] or abs(graph[x] - graph[i]) == abs(x - i):
+            return False
+    return True
 
 def dfs(row):
     global count
@@ -7,11 +11,9 @@ def dfs(row):
         return
     for i in range(n):
         graph[row] = i # 3,3 -> (1,1)(2,2) // (4,2) (5,1)
-        for j in range(row):
-            if(abs(graph[row]-graph[j]) == abs(row-j) or graph[row]==graph[j]):
-                return
-    dfs(row+1)
-
+        if is_promising(row):
+            dfs(row+1)
+        
 n = int(input())
 count = 0
 graph = [0]*n
