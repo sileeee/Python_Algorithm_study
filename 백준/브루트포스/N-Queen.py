@@ -10,7 +10,7 @@ def dfs(row):
         count+=1
         return
     for i in range(n):
-        graph[row] = i # 3,3 -> (1,1)(2,2) // (4,2) (5,1)
+        graph[row] = i # 3,3이면 -> (1,1)(2,2)체크 / (4,2) (5,1)
         if is_promising(row):
             dfs(row+1)
         
