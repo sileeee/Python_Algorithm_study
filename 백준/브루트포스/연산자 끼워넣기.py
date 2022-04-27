@@ -1,31 +1,32 @@
-import sys
+# error
+import itertools
 
-input = sys.stdin.readline
-N = int(input())
-num = list(map(int, input().split()))
-op = list(map(int, input().split()))  # +, -, *, //
+n = int(input())
+num = list(map(int,input().split()))
+oper = list(map(int, input().split()))
+oper_arr = ['+','-','x','/']
+permu_oper = []
+max_result = 0
+min_result = sum(num)
 
-maximum = -1e9
-minimum = 1e9
+for i in range(len(oper)):
+    for j in range(oper[i]):
+        permu_oper.append(oper_arr[i])
 
+npm = list(itertools.permutations(permu_oper, len(permu_oper))) #연산자 순열
 
-def dfs(depth, total, plus, minus, multiply, divide):
-    global maximum, minimum
-    if depth == N:
-        maximum = max(total, maximum)
-        minimum = min(total, minimum)
-        return
-
-    if plus:
-        dfs(depth + 1, total + num[depth], plus - 1, minus, multiply, divide)
-    if minus:
-        dfs(depth + 1, total - num[depth], plus, minus - 1, multiply, divide)
-    if multiply:
-        dfs(depth + 1, total * num[depth], plus, minus, multiply - 1, divide)
-    if divide:
-        dfs(depth + 1, int(total / num[depth]), plus, minus, multiply, divide - 1)
-
-
-dfs(1, num[0], op[0], op[1], op[2], op[3])
-print(maximum)
-print(minimum)
+for i in npm: 
+    result = num[0]
+    for j in range(1, len(num)):
+        if (*i) == '+':
+            result += j
+        if (*i) == '-':
+            result -= j
+        if (*i) == 'x':
+            result *= j
+        if (*i) == '/':
+            result /= j
+    max_result = max(max_result, result)
+    min_result = min(min_result, result)
+print(max_result)
+print(min_result)
