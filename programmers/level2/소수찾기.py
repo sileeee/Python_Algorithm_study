@@ -1,10 +1,24 @@
-from itertools import permutations
-def solution(n):
-    a = set()
-    for i in range(len(n)):
-        a |= set(map(int, map("".join, permutations(list(n), i + 1)))) 
-    a -= set(range(0, 2)) 
+#error
+import itertools
 
-    for i in range(2, int(max(a) ** 0.5) + 1):
-        a -= set(range(i * 2, max(a) + 1, i))
-    return len(a)
+def solution(numbers):
+    answer = 0
+    arr = []
+    
+    for i in range(1, len(numbers)+1):
+        per = itertools.permutations(numbers, i)
+        for j in per:
+            perStr = ''.join(j)
+            arr.append(perStr)
+    arr = set(arr)
+    
+    for i in arr:
+        if int(i) == 1:
+            continue
+        for j in range(2, int(i)):
+            if int(i)%j == 0:
+                continue
+        answer +=1
+               
+        
+    return answer
