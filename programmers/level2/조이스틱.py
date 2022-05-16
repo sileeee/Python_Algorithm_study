@@ -1,14 +1,21 @@
 def solution(name):
     answer = 0
-    min_left_right = len(name)
-    next_idx = 0
-    for idx, char in enumerate(name):
+    min_move = len(name) - 1
+    next = 0
+    
+    while name[min_move] == 'A' and min_move > 0:
+        min_move -= 1
+    
+    if (min_move < 0):
+        return answer
+        
+    for i, char in enumerate(name):
         answer += min(ord(char) - ord('A'), ord('Z') - ord(char) + 1)
         
-        next_idx = idx + 1
-        while next_idx < len(name) and name[next_idx] == 'A':
-            next_idx += 1
+        next = i + 1
+        while next < len(name) and name[next] == 'A':
+            next += 1
         
-        min_left_right = min(min_left_right, idx + idx + len(name) - next_idx)
-    answer += min_left_right
+        min_move = min(min_move, i + (i + len(name)) - next)
+    answer += min_move
     return answer
