@@ -1,14 +1,19 @@
 def solution(numbers, target):
-    n = len(numbers)
+    global answer 
     answer = 0
-    def dfs(idx, result):
-        if idx == n:
-            if result == target:
-                nonlocal answer
-                answer += 1
+    sum = 0
+    depth = 0
+
+    dfs(depth, numbers, sum, target)
+    return answer
+
+def dfs(depth, numbers, sum, target):
+    global answer
+    if(depth == len(numbers)):
+        if(sum != target):
             return
         else:
-            dfs(idx+1, result+numbers[idx])
-            dfs(idx+1, result-numbers[idx])
-    dfs(0,0)
-    return answer
+            answer += 1
+            return 
+    dfs(depth+1, numbers, sum+numbers[depth], target)
+    dfs(depth+1, numbers, sum-numbers[depth], target)
