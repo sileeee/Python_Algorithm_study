@@ -1,26 +1,15 @@
-# error(시간초과)
-
-import sys
-read = lambda: sys.stdin.readline().rstrip()
-
 line = int(input())
 arr = []
-global max
-max = 0
-position = 0
 
-for i in range(line):
-    arr.append(list(map(int, read().split())))
+for i in range(line) :                            
+    arr.append(list(map(int,input().split())))
 
-def triangle(sum, position, depth):
-    global max
-    if depth==line:
-        if max<sum:
-            max = sum
-        return 
-    triangle(sum+arr[depth][position], position, depth+1)
-    if position != depth:
-        triangle(sum+arr[depth][position+1], position+1, depth+1)
-
-triangle(0, 0, 0)
-print(max)
+for i in range(1, line):
+    for j in range(i+1):
+        if j==0:
+            arr[i][j] += arr[i-1][j]
+        elif j == i:
+            arr[i][j] += arr[i-1][j-1]
+        else:
+            arr[i][j] += max(arr[i-1][j-1], arr[i-1][j])
+print(max(arr[line-1]))
