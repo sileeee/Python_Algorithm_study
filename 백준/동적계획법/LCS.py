@@ -1,24 +1,17 @@
-# error
+# error (다른 테스트케이스에서 indexerror 발생 ㅠ)
 
 arr = []
 for _ in range(2):
-    arr.append(list(str(input())))  
-lcs = [0,0]
-pos = 0
-pos_tmp = 0
-for j in range(2):
-    pos_tmp = 0
-    pos = 0
-    for i in arr[0+j]:
-        #print(arr[1][pos])
-        while(pos_tmp != len(arr[1-j])):
-            if pos == len(arr[1]):
-                pos = pos_tmp
-                break
-            if i == arr[1-j][pos]:
-                pos+=1
-                pos_tmp = pos
-                lcs[j] +=1
-                break
-            pos+=1
-print(max(lcs))
+    arr.append(list(str(input())))
+
+lcs = [[0]*(len(arr[0])+1) for _ in range(len(arr[1])+1)]
+# arr[0] : ACAYKP
+# arr[1] : CAPCAK
+
+for i in range(1, len(arr[0])+1):
+    for j in range(1, len(arr[1])+1):
+        if arr[0][i-1]==arr[1][j-1]:
+            lcs[i][j] = lcs[i-1][j-1]+1
+        else:
+            lcs[i][j] = max(lcs[i-1][j], lcs[i][j-1])
+print(lcs[-1][-1])
