@@ -1,18 +1,19 @@
-# 시간 초과
-
 n, m = map(int, input().split())
 arr = list(map(int,input().split()))
 
-arr2 = []
-for i in arr:
-    arr2.append(i%m)
+arr_m = [0 for _ in range(m)]
+s = 0
+num = 0
 
-sum_tmp = 0
-result = 0
-for i in range(n): 
-    for j in range(i, n):
-        sum_tmp += arr2[j]
-        if(sum_tmp % 3 == 0):
-            result += 1
-    sum_tmp = 0
-print(result)
+for i in range(n):
+    s += arr[i]
+    res = s % m
+    if res == 0:
+        num += 1
+    arr_m[res] += 1
+    
+for i in range(m):
+    if arr_m == 0:
+        continue
+    num += arr_m[i] * (arr_m[i] - 1) / 2
+print(int(num))
