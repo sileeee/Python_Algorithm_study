@@ -1,18 +1,22 @@
-# error
+t = int(input())
 
-n = int(input())
-st = []
-tmp = 0
+for _ in range(t):
+    n,m = list(map(int, input().split( )))
+    imp = list(map(int, input().split( )))
+    idx = list(range(len(imp)))
+    idx[m] = 'target'
 
-for _ in range(n):
-    a, b = map(int,input().split())
-    for i in range(a):
-        st.append(int(input().split()))
-        if i == b:
-            tmp = st[-1]
-        st.sort()
-    for i in range(len(st)):
-        if st.pop() == tmp:
-            print(i+1)
+    order = 0
+    
+    while True:
+        if imp[0]==max(imp):
+            order += 1
+            if idx[0]=='target':
+                print(order)
+                break
+            else:
+                imp.pop(0)
+                idx.pop(0)
         else:
-            st.pop()
+            imp.append(imp.pop(0))
+            idx.append(idx.pop(0))  
