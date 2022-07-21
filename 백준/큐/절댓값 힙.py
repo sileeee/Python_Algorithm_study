@@ -1,22 +1,15 @@
-# error
+import sys
+import heapq
 
-from queue import PriorityQueue
-
-q = PriorityQueue()
 n = int(input())
-arr = []
+h = []
 
 for _ in range(n):
-    i = int(input())
-    arr.append(i)
-    if i<0:
-        q.put((i*-0.9, i))
-    elif i == 0:
-        if q.empty():
-            print("0")
-        else:
-            print(q.get()[1])
+    i = int(sys.stdin.readline().rstrip())
+    if i!=0:
+        heapq.heappush(h, (abs(i), i))
     else:
-        q.put((i, i))
-    
-
+        try:
+            print(heapq.heappop(h)[1])
+        except:
+            print(0)
